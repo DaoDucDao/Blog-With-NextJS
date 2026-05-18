@@ -15,11 +15,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("http://localhost:3500"),
   title: {
     default: "Blog With Next.js",
     template: "%s · Blog With Next.js",
   },
   description: "A personal blog built while learning the Next.js App Router.",
+  openGraph: {
+    title: "Blog With Next.js",
+    description: "A personal blog built while learning the Next.js App Router.",
+    type: "website",
+    siteName: "Blog With Next.js",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog With Next.js",
+    description: "A personal blog built while learning the Next.js App Router.",
+  },
 };
 
 export default function RootLayout({
