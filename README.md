@@ -36,23 +36,39 @@ Open [http://localhost:3500](http://localhost:3500) in your browser. The dev ser
 
 ## One-Week Learning Plan
 
-| Day | Focus |
-| --- | --- |
-| 1 | Scaffold project, root layout, header/footer, home page |
-| 2 | Markdown/MDX posts, `gray-matter` frontmatter, `[slug]` dynamic route |
-| 3 | Post index page, per-post SEO metadata via `generateMetadata` |
-| 4 | Tailwind Typography for `.prose` styling, syntax highlighting |
-| 5 | Tags / categories with filter pages, dark mode toggle, reading time |
-| 6 | RSS feed, sitemap, contact form or view counter |
-| 7 | Deploy to Vercel |
+| Day | Focus | Status |
+| --- | --- | --- |
+| 1 | Scaffold project, root layout, header/footer, home page | ✅ Done |
+| 2 | Markdown/MDX posts, `gray-matter` frontmatter, `[slug]` dynamic route | ✅ Done |
+| 3 | Post index page, per-post SEO metadata via `generateMetadata` | ✅ Done (covered during Day 2) — extending with OpenGraph, sitemap, 404, active nav |
+| 4 | Tailwind Typography for `.prose` styling, syntax highlighting | ⏳ Next |
+| 5 | Tags / categories with filter pages, dark mode toggle, reading time | ⏳ |
+| 6 | RSS feed, sitemap, contact form or view counter | ⏳ |
+| 7 | Deploy to Vercel | ⏳ |
 
 ## Project Structure
 
 ```
 app/
-├── layout.tsx     # root layout (wraps every route)
-├── page.tsx       # "/" route
-└── globals.css    # Tailwind directives + base styles
+├── layout.tsx                  # root layout (header + footer + html shell)
+├── page.tsx                    # "/" — intro + link to posts
+├── globals.css                 # Tailwind directives + base styles
+├── Components/
+│   ├── Header/Header.tsx       # site header (nav)
+│   └── Footer/Footer.tsx       # site footer
+└── posts/
+    ├── page.tsx                # "/posts" — list of all posts
+    └── [slug]/
+        └── page.tsx            # "/posts/:slug" — one post (SSG)
+
+content/
+└── posts/
+    ├── hello-world.mdx
+    ├── folders-are-routes.mdx
+    └── ssg-vs-ssr.mdx          # the posts themselves (frontmatter + MDX body)
+
+lib/
+└── posts.ts                    # server-side helpers: getAllPosts / getPostBySlug
 ```
 
-Routing is file-system based — folders inside `app/` become URL segments, and a `page.tsx` inside a folder makes it routable.
+Routing is file-system based — folders inside `app/` become URL segments, and a `page.tsx` inside a folder makes it routable. Posts live as `.mdx` files in `content/posts/` and are pre-rendered to static HTML at build time via `generateStaticParams`.
