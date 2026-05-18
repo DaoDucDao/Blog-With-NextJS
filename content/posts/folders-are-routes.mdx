@@ -1,0 +1,27 @@
+---
+title: In Next.js, folders are routes
+date: 2026-05-17
+summary: A short note on the App Router — the file system is the routing config.
+tags: [nextjs, routing]
+---
+
+# Folders are routes
+
+The Next.js App Router has one big idea: **your folder structure is your
+routing config**. No `routes.tsx`, no manual `<Route>` wiring.
+
+A folder becomes a URL. A `page.tsx` inside it makes the folder routable.
+That's it.
+
+```
+app/
+├── page.tsx          → /
+├── about/page.tsx    → /about
+└── posts/
+    ├── page.tsx      → /posts
+    └── [slug]/page.tsx  → /posts/anything
+```
+
+Folders wrapped in `[brackets]` are dynamic — they match anything in that
+segment and pass the value to the page as a parameter. One file, infinite
+URLs.

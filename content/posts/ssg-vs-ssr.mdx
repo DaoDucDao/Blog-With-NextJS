@@ -1,0 +1,23 @@
+---
+title: SSG vs SSR, in one table
+date: 2026-05-18
+summary: The two are not the same. Here's the distinction that finally made it click for me.
+tags: [nextjs, rendering]
+---
+
+# SSG vs SSR
+
+Both produce HTML on the server. The difference is **when**.
+
+| | SSR | SSG |
+| --- | --- | --- |
+| When | On every request | Once, at build time |
+| Output | Re-rendered per visit | A folder of static HTML files |
+| Good for | Data that changes per user / per second | Data that's the same for everyone, rarely changes |
+
+A blog is the textbook SSG case. The same post HTML works for every visitor,
+and posts don't change between requests. So we render once at build, and
+serve plain files.
+
+In Next.js, the toggle is `generateStaticParams`. Add it to a dynamic route
+and Next pre-renders one HTML file per parameter value at build time.
