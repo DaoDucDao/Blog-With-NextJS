@@ -1,8 +1,18 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
+import rehypePrettyCode from "rehype-pretty-code";
 import type { Metadata } from "next";
+import type { Pluggable } from "unified";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
+
+const rehypePlugins: Pluggable[] = [
+   [rehypePrettyCode, { theme: "github-dark", keepBackground: false }],
+];
+
+const mdxOptions = {
+   mdxOptions: { rehypePlugins },
+};
 
 export const dynamicParams = false;
 
@@ -61,8 +71,8 @@ const PostPage = async ({ params }: Props) => {
             <p className="text-lg text-zinc-600 dark:text-zinc-400">{post.summary}</p>
          </header>
 
-         <div className="mt-12 flex flex-col gap-4 text-zinc-800 dark:text-zinc-200">
-            <MDXRemote source={post.content} />
+         <div className="prose prose-zinc dark:prose-invert max-w-none mt-12 prose-headings:tracking-tight prose-a:underline prose-a:underline-offset-4">
+            <MDXRemote source={post.content} options={mdxOptions} />
          </div>
 
          <div className="mt-16">
