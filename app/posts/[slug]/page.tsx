@@ -5,6 +5,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import type { Metadata } from "next";
 import type { Pluggable } from "unified";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import TagList from "@/app/Components/TagList/TagList";
 
 const rehypePlugins: Pluggable[] = [
    [rehypePrettyCode, { theme: "github-dark", keepBackground: false }],
@@ -65,10 +66,11 @@ const PostPage = async ({ params }: Props) => {
       <article className="mx-auto max-w-3xl px-6 py-16">
          <header className="flex flex-col gap-3">
             <span className="text-sm text-zinc-500 dark:text-zinc-400">
-               {formatDate(post.date)}
+               {formatDate(post.date)} · {post.readingTime} min read
             </span>
             <h1 className="text-4xl font-semibold tracking-tight">{post.title}</h1>
             <p className="text-lg text-zinc-600 dark:text-zinc-400">{post.summary}</p>
+            <TagList tags={post.tags} />
          </header>
 
          <div className="prose prose-zinc dark:prose-invert max-w-none mt-12 prose-headings:tracking-tight prose-a:underline prose-a:underline-offset-4">

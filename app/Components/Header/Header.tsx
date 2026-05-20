@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NavLink from "./NavLink";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => (
    <header className="border-b border-black/10 dark:border-white/10">
@@ -8,11 +9,14 @@ const Header = () => (
             Blog With Next.js
          </Link>
 
-         <nav className="flex items-center gap-6 text-sm">
-            <NavLink href="/">Home</NavLink>
-            <NavLink href="/posts">Posts</NavLink>
-            <NavLink href="/about">About</NavLink>
-         </nav>
+         <div className="flex items-center gap-6 text-sm">
+            <nav className="flex items-center gap-6">
+               <NavLink href="/">Home</NavLink>
+               <NavLink href="/posts">Posts</NavLink>
+               <NavLink href="/about">About</NavLink>
+            </nav>
+            <ThemeToggle />
+         </div>
       </div>
    </header>
 );
